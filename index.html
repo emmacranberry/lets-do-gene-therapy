@@ -25,25 +25,46 @@
       display: none;
       flex-direction: column;
       justify-content: center;
-      align-items: center;
-      padding: 4rem 6vw;
-      text-align: center;
+      align-items: flex-start;
+      padding: 4rem 8vw;
+      text-align: left;
     }
     .slide.active {
       display: flex;
       animation: fade 0.4s ease;
+    }
+    .slide.title {
+      align-items: center;
+      text-align: center;
     }
     @keyframes fade {
       from { opacity: 0; transform: translateY(12px); }
       to { opacity: 1; transform: translateY(0); }
     }
     h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.05; margin-bottom: 1rem; }
-    h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--accent); margin-bottom: 1.5rem; }
-    p, li { font-size: clamp(1.1rem, 2.2vw, 1.6rem); line-height: 1.5; max-width: 55ch; }
-    ul { list-style: none; }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--accent); margin-bottom: 1.5rem; width: 100%; }
+    p, li { font-size: clamp(1.1rem, 2.2vw, 1.5rem); line-height: 1.55; max-width: 60ch; }
+    ul { list-style: none; width: 100%; max-width: 60ch; }
     ul li { margin: 0.65rem 0; }
     ul li::before { content: "•"; color: var(--accent); margin-right: 0.6rem; }
     .small { font-size: clamp(0.9rem, 1.5vw, 1.1rem); color: var(--muted); margin-top: 1.5rem; }
+    .slide img {
+      max-height: 32vh;
+      max-width: 85%;
+      object-fit: contain;
+      margin-top: 1.5rem;
+      align-self: center;
+      border-radius: 0.5rem;
+    }
+    .credit {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.5rem;
+      align-self: center;
+      max-width: 85%;
+      text-align: center;
+      line-height: 1.3;
+    }
     .controls {
       position: fixed;
       bottom: 1.5rem;
@@ -65,15 +86,20 @@
     }
     button:hover { background: rgba(255, 255, 255, 0.2); }
     .counter { color: var(--muted); font-variant-numeric: tabular-nums; }
-    @media (max-width: 600px) { .slide { padding: 2rem 5vw; } }
+    @media (max-width: 600px) {
+      .slide { padding: 2rem 6vw; }
+      .slide img { max-height: 28vh; max-width: 95%; }
+    }
   </style>
 </head>
 <body>
   <div id="deck">
 
-    <section class="slide active">
+    <section class="slide title active">
       <h1>let's do gene therapy</h1>
       <p class="small">Not medical advice.</p>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/59/In_vivo_gene_therapy.jpg" alt="Gene therapy concept illustration">
+      <div class="credit">Image: Lizanne Koch / NIH / public domain</div>
     </section>
 
     <section class="slide">
@@ -83,6 +109,8 @@
         <li>DNA stores the blueprint using the letters ATCG</li>
         <li>Cells read that blueprint to build proteins</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/c/c4/DNA_double_helix_horizontal.png" alt="DNA double helix">
+      <div class="credit">Image: Jerome Walker / public domain</div>
     </section>
 
     <section class="slide">
@@ -91,6 +119,8 @@
         <li>The good news: nature already made millions — just pick one</li>
         <li>There is tons of research and many resources for finding a target protein</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/3/34/Protein_structure_2K35.jpg" alt="Protein structure">
+      <div class="credit">Image: Axel Boldt / public domain</div>
     </section>
 
     <section class="slide">
@@ -100,6 +130,8 @@
         <li>Human DNA is linear, but DNA can also form a circle — a plasmid</li>
         <li>A plasmid can carry multiple parts: target protein sequence, a “production” sequence, and more</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/d/d1/Ti_plasmid.svg" alt="Plasmid diagram">
+      <div class="credit">Image: Wikimedia Commons / CC0</div>
     </section>
 
     <section class="slide">
@@ -107,6 +139,8 @@
       <ul>
         <li>Once designed, you can order the plasmid for a couple hundred dollars</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/2/23/PBR322_Map.svg" alt="Plasmid map">
+      <div class="credit">Image: Wikimedia Commons / CC0</div>
     </section>
 
     <section class="slide">
@@ -116,6 +150,8 @@
         <li>Use well-documented practices to infect bacteria</li>
         <li>Grow the colonies that survived and took up the plasmid</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/E_coli_at_10000x.jpg" alt="E. coli bacteria">
+      <div class="credit">Image: Eric Erbe & Christopher Pooley / USDA / public domain</div>
     </section>
 
     <section class="slide">
@@ -125,6 +161,8 @@
         <li>Test it</li>
         <li>Use PCR to make more copies of the DNA</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/A_Multi_Bay_PCR_Machine.jpg" alt="PCR machine">
+      <div class="credit">Image: Wikimedia Commons / CC0</div>
     </section>
 
     <section class="slide">
@@ -133,6 +171,8 @@
         <li>From here you need a retrovirus to get the DNA into human cells</li>
         <li>That is where it gets more difficult</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/f3/ExVivoGeneTherapy.jpg" alt="Ex vivo gene therapy">
+      <div class="credit">Image: Lizanne Koch / NIH / public domain</div>
     </section>
 
     <section class="slide">
@@ -142,13 +182,25 @@
         <li>Proteins that synthesize compounds or medicines</li>
         <li>Cancer therapies</li>
       </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/54/Insulin_synthesis.png" alt="Insulin synthesis">
+      <div class="credit">Image: Wikimedia Commons / public domain</div>
+    </section>
+
+    <section class="slide">
+      <h2>real world examples</h2>
+      <ul>
+        <li>Lactose intolerance</li>
+        <li>Jo zayner</li>
+      </ul>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/b/b3/Jo_Zayner_2023a.jpg" alt="Jo Zayner">
+      <div class="credit">Image: User:Jzayner / Wikimedia Commons / CC BY-SA 4.0</div>
     </section>
 
   </div>
 
   <div class="controls">
     <button id="prev" aria-label="Previous slide">←</button>
-    <span class="counter" id="counter">1 / 9</span>
+    <span class="counter" id="counter">1 / 10</span>
     <button id="next" aria-label="Next slide">→</button>
   </div>
 
