@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Let's do gene therapy</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --fg: #f8fafc;
+      --accent: #38bdf8;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      overflow: hidden;
+    }
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 4rem 6vw;
+      text-align: center;
+    }
+    .slide.active {
+      display: flex;
+      animation: fade 0.4s ease;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    h1 { font-size: clamp(2.5rem, 7vw, 5.5rem); line-height: 1.05; margin-bottom: 1rem; }
+    h2 { font-size: clamp(1.75rem, 4vw, 2.75rem); color: var(--accent); margin-bottom: 1.5rem; }
+    p, li { font-size: clamp(1.1rem, 2.2vw, 1.6rem); line-height: 1.5; max-width: 55ch; }
+    ul { list-style: none; }
+    ul li { margin: 0.65rem 0; }
+    ul li::before { content: "•"; color: var(--accent); margin-right: 0.6rem; }
+    .small { font-size: clamp(0.9rem, 1.5vw, 1.1rem); color: var(--muted); margin-top: 1.5rem; }
+    .controls {
+      position: fixed;
+      bottom: 1.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      z-index: 10;
+    }
+    button {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: var(--fg);
+      padding: 0.6rem 1rem;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    button:hover { background: rgba(255, 255, 255, 0.2); }
+    .counter { color: var(--muted); font-variant-numeric: tabular-nums; }
+    @media (max-width: 600px) { .slide { padding: 2rem 5vw; } }
+  </style>
+</head>
+<body>
+  <div id="deck">
+
+    <section class="slide active">
+      <h1>let's do gene therapy</h1>
+      <p class="small">Not medical advice.</p>
+    </section>
+
+    <section class="slide">
+      <h2>how do we work?</h2>
+      <ul>
+        <li>Proteins are machines made from a single string of building blocks</li>
+        <li>DNA stores the blueprint using the letters ATCG</li>
+        <li>Cells read that blueprint to build proteins</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>proteins are complicated</h2>
+      <ul>
+        <li>The good news: nature already made millions — just pick one</li>
+        <li>There is tons of research and many resources for finding a target protein</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>ok I have one</h2>
+      <ul>
+        <li>Now you need a delivery vehicle</li>
+        <li>Human DNA is linear, but DNA can also form a circle — a plasmid</li>
+        <li>A plasmid can carry multiple parts: target protein sequence, a “production” sequence, and more</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>plasmid design complete</h2>
+      <ul>
+        <li>Once designed, you can order the plasmid for a couple hundred dollars</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>package arrived</h2>
+      <ul>
+        <li>It shows up in a dry-ice dewar</li>
+        <li>Use well-documented practices to infect bacteria</li>
+        <li>Grow the colonies that survived and took up the plasmid</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>goo grown (media)</h2>
+      <ul>
+        <li>Kill the bacteria and extract your DNA</li>
+        <li>Test it</li>
+        <li>Use PCR to make more copies of the DNA</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>DNA media complete</h2>
+      <ul>
+        <li>From here you need a retrovirus to get the DNA into human cells</li>
+        <li>That is where it gets more difficult</li>
+      </ul>
+    </section>
+
+    <section class="slide">
+      <h2>real world example?</h2>
+      <ul>
+        <li>Making proteins like insulin</li>
+        <li>Proteins that synthesize compounds or medicines</li>
+        <li>Cancer therapies</li>
+      </ul>
+    </section>
+
+  </div>
+
+  <div class="controls">
+    <button id="prev" aria-label="Previous slide">←</button>
+    <span class="counter" id="counter">1 / 9</span>
+    <button id="next" aria-label="Next slide">→</button>
+  </div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let i = 0;
+    function show(n) {
+      slides[i].classList.remove('active');
+      i = (n + slides.length) % slides.length;
+      slides[i].classList.add('active');
+      document.getElementById('counter').textContent = (i + 1) + ' / ' + slides.length;
+    }
+    document.getElementById('prev').onclick = () => show(i - 1);
+    document.getElementById('next').onclick = () => show(i + 1);
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault();
+        show(i + 1);
+      }
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        show(i - 1);
+      }
+    });
+  </script>
+</body>
+</html>
